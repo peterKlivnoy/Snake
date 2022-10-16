@@ -130,19 +130,19 @@ def update(app):
 
 
 def update_scoreboard(app):
-    app.high_score.append([app.snake_size, app.player_name])
-    app.high_score.sort()
-    app.high_score.reverse()
-    print(app.high_score)
-    new_names = []
-    new_scores = []
-    for i in range(10):
-        new_names.append(app.high_score[i][1])
-        new_scores.append(app.high_score[i][0])
-    for i in range(2, 12):
-        app.sh.update(f'A{i}', new_scores[i-2])
-        app.sh.update(f'b{i}', new_names[i-2])
-
+    if app.snake_size> app.high_score[-1][0]:
+        app.high_score.append([app.snake_size, app.player_name])
+        app.high_score.sort()
+        app.high_score.reverse()
+        print(app.high_score)
+        new_names = []
+        new_scores = []
+        for i in range(10):
+            new_names.append(app.high_score[i][1])
+            new_scores.append(app.high_score[i][0])
+        for i in range(2, 12):
+            app.sh.update(f'A{i}', new_scores[i-2])
+            app.sh.update(f'b{i}', new_names[i-2])
 
 def delete_all_fruit(grid):
     for x in range(len(grid)):
